@@ -1,0 +1,40 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Address</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.phone }}</td>
+      <td>{{ user.address }}</td>
+      <td>
+        <button (click)="editUser(user.id, user)">Edit</button>
+        <button (click)="deleteUser(user.id)">Delete</button>
+      </td>
+    </tr>
+     <!-- Edit form -->
+     <tr *ngIf="editingUser">
+      <td colspan="5">
+        <form (ngSubmit)="saveUserChanges()" #editForm="ngForm">
+          <input type="text" name="name" [(ngModel)]="editingUser.name" placeholder="Name" required>
+          <input type="email" name="email" [(ngModel)]="editingUser.email" placeholder="Email" required>
+          <input type="text" name="phone" [(ngModel)]="editingUser.phone" placeholder="Phone" required>
+          <input type="text" name="address" [(ngModel)]="editingUser.address" placeholder="Address" required>
+          <button type="submit">Save</button>
+          <button type="button" (click)="cancelEdit()">Cancel</button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="generatePDF()">Generate PDF</button>
+<button (click)="downloadPDF()">Download PDF</button>
+<button (click)="viewPDF()">View PDF</button>
